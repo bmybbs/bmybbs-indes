@@ -15,10 +15,12 @@ static int getAllBoards_callback(struct boardmem *board, int curr_idx, va_list a
 	jboolean hasException;
 	memset(&hasException, 0, sizeof(jboolean));
 	jobject jboard = jni_utils_allocate_new_object_by_classname(env, &hasException, "edu/xjtu/bmybbs/ythtbbs/Board", "(Ljava/lang/String;)V", jboard_name);
+	(*env)->DeleteLocalRef(env, jboard_name);
 	if (jboard == NULL)
 		return -1;
 
 	jni_utils_call_method_by_name(env, &hasException, list_board, "add", "(Ljava/lang/Object;)Z", jboard);
+	(*env)->DeleteLocalRef(env, jboard);
 	return 0;
 };
 
@@ -63,8 +65,7 @@ JNIEXPORT jobject JNICALL Java_edu_xjtu_bmybbs_ythtbbs_Board_getBoardByName(JNIE
 		return NULL;
 
 	jobject jboard = jni_utils_allocate_new_object_by_classname(env, &hasException, "edu/xjtu/bmybbs/ythtbbs/Board", "(Ljava/lang/String;)V", jboard_name);
-	if (jboard == NULL)
-		return NULL;
+	(*env)->DeleteLocalRef(env, jboard_name);
 
 	return jboard;
 }
