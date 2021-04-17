@@ -9,6 +9,10 @@ public class Board {
 		this.name = bname;
 	}
 
+	public String getName() {
+		return name;
+	}
+
 	public static native List<Board> getAllBoards();
 
 	public static native Board getBoardByName(String bname);
