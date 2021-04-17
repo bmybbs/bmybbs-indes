@@ -40,3 +40,32 @@ JNIEXPORT jobject JNICALL Java_edu_xjtu_bmybbs_ythtbbs_Board_getAllBoards(JNIEnv
 
 	return list_board;
 }
+
+JNIEXPORT jobject JNICALL Java_edu_xjtu_bmybbs_ythtbbs_Board_getBoardByName(JNIEnv *env, jclass clazz, jstring jstr_bname) {
+	(void) clazz;
+	jboolean hasException;
+	memset(&hasException, 0, sizeof(jboolean));
+	if (jstr_bname == NULL)
+		return NULL;
+
+	const char *bname = (*env)->GetStringUTFChars(env, jstr_bname, &hasException);
+
+	ythtbbs_cache_utmp_resolve();
+	ythtbbs_cache_UserTable_resolve();
+	ythtbbs_cache_Board_resolve();
+
+	const struct boardmem *board = ythtbbs_cache_Board_get_board_by_name(bname);
+	if (board == NULL)
+		return NULL;
+
+	jstring jboard_name = (*env)->NewStringUTF(env, board->header.filename);
+	if (jboard_name == NULL)
+		return NULL;
+
+	jobject jboard = jni_utils_allocate_new_object_by_classname(env, &hasException, "edu/xjtu/bmybbs/ythtbbs/Board", "(Ljava/lang/String;)V", jboard_name);
+	if (jboard == NULL)
+		return NULL;
+
+	return jboard;
+}
+

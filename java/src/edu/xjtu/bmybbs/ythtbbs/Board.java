@@ -11,6 +11,8 @@ public class Board {
 
 	public static native List<Board> getAllBoards();
 
+	public static native Board getBoardByName(String bname);
+
 	static {
 		System.loadLibrary("bmybbs-java");
 	}
