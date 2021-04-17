@@ -57,6 +57,7 @@ JNIEXPORT jobject JNICALL Java_edu_xjtu_bmybbs_ythtbbs_Board_getBoardByName(JNIE
 	ythtbbs_cache_Board_resolve();
 
 	const struct boardmem *board = ythtbbs_cache_Board_get_board_by_name(bname);
+	(*env)->ReleaseStringUTFChars(env, jstr_bname, bname);
 	if (board == NULL)
 		return NULL;
 
