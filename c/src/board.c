@@ -14,7 +14,7 @@ static int getAllBoards_callback(struct boardmem *board, int curr_idx, va_list a
 
 	jboolean hasException;
 	memset(&hasException, 0, sizeof(jboolean));
-	jobject jboard = jni_utils_allocate_new_object_by_classname(env, &hasException, "edu/xjtu/bmybbs/ythtbbs/Board", "(Ljava/lang/String;)V");
+	jobject jboard = jni_utils_allocate_new_object_by_classname(env, &hasException, "edu/xjtu/bmybbs/ythtbbs/Board", "(Ljava/lang/String;)V", jboard_name);
 	if (jboard == NULL)
 		return -1;
 
