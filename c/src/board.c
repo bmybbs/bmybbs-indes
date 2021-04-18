@@ -24,6 +24,11 @@ static int getAllBoards_callback(struct boardmem *board, int curr_idx, va_list a
 	return 0;
 };
 
+/*
+ * Class:     edu_xjtu_bmybbs_ythtbbs_Board
+ * Method:    getAllBoards
+ * Signature: ()Ljava/util/List;
+ */
 JNIEXPORT jobject JNICALL Java_edu_xjtu_bmybbs_ythtbbs_Board_getAllBoards(JNIEnv *env, jclass clazz) {
 	(void) clazz;
 	jboolean hasException;
@@ -43,6 +48,11 @@ JNIEXPORT jobject JNICALL Java_edu_xjtu_bmybbs_ythtbbs_Board_getAllBoards(JNIEnv
 	return list_board;
 }
 
+/*
+ * Class:     edu_xjtu_bmybbs_ythtbbs_Board
+ * Method:    getBoardByName
+ * Signature: (Ljava/lang/String;)Ledu/xjtu/bmybbs/ythtbbs/Board;
+ */
 JNIEXPORT jobject JNICALL Java_edu_xjtu_bmybbs_ythtbbs_Board_getBoardByName(JNIEnv *env, jclass clazz, jstring jstr_bname) {
 	(void) clazz;
 	jboolean hasException;
