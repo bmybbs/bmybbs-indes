@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import edu.xjtu.bmybbs.ythtbbs.Article;
 import edu.xjtu.bmybbs.ythtbbs.Board;
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
@@ -42,7 +42,7 @@ public class Searcher {
 		}
 
 		IndexSearcher searcher = new IndexSearcher(reader);
-		Analyzer analyzer = new StandardAnalyzer();
+		Analyzer analyzer = new SmartChineseAnalyzer();
 
 		QueryParser parser = new QueryParser("contents", analyzer);
 		Query query;

@@ -3,7 +3,7 @@ package edu.xjtu.bmybbs;
 import edu.xjtu.bmybbs.ythtbbs.Article;
 import edu.xjtu.bmybbs.ythtbbs.Board;
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.cn.smart.SmartChineseAnalyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.document.Field;
 import org.apache.lucene.document.StringField;
@@ -71,7 +71,7 @@ public class Indexer {
 			return;
 		}
 
-		Analyzer analyzer = new StandardAnalyzer();
+		Analyzer analyzer = new SmartChineseAnalyzer();
 		IndexWriterConfig iwc = new IndexWriterConfig(analyzer);
 		iwc.setOpenMode(IndexWriterConfig.OpenMode.CREATE_OR_APPEND);
 		IndexWriter writer;
