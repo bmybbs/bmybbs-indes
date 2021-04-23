@@ -5,6 +5,8 @@ class App {
 		if (args.length == 3) {
 			if (args[0].equals("index")) {
 				Indexer.Index(args[1], args[2]);
+			} else if (args[0].equals("dump")) {
+				Utils.DumpArticle(args[1], args[2]);
 			}
 		} else {
 			System.err.println("使用参数错误，正确的调用方式：\n"
