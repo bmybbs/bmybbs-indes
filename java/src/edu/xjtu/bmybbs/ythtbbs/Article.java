@@ -6,13 +6,18 @@ public class Article {
 	private String board;
 	private String title;
 	private String owner;
+	private String timestamp;
 	private String filename;
 
 	public Article(String board, String title, String owner, long timestamp) {
+		this(board, title, owner, Long.toString(timestamp));
+	}
+
+	public Article(String board, String title, String owner, String timestamp) {
 		this.board = board;
 		this.title = title;
 		this.owner = owner;
-		this.filename = String.format("M.%d.A", timestamp);
+		this.filename = String.format("M.%s.A", timestamp);
 	}
 
 	public String getFilename() {
@@ -25,6 +30,10 @@ public class Article {
 
 	public String getTitle() {
 		return this.title;
+	}
+
+	public String getTimestamp() {
+		return this.timestamp;
 	}
 
 	public String getPath() {
