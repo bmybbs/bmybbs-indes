@@ -106,5 +106,11 @@ public class Indexer {
 				System.err.format("无法索引文件: %s\n", articlePath);
 			}
 		}
+
+		try {
+			writer.close();
+		} catch (IOException e) {
+			System.err.println("无法写入索引");
+		}
 	}
 }
