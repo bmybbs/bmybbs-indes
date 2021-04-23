@@ -106,7 +106,7 @@ JNIEXPORT jstring JNICALL Java_edu_xjtu_bmybbs_ythtbbs_Article_getContent(JNIEnv
 			filename = (*env)->GetStringUTFChars(env, jstr_filename, NULL);
 
 			snprintf(buf, sizeof(buf), MY_BBS_HOME "/boards/%s/%s", board, filename);
-			jstr_content = getContent(env, filename);
+			jstr_content = getContent(env, buf);
 
 			(*env)->ReleaseStringUTFChars(env, jstr_filename, filename);
 			(*env)->DeleteLocalRef(env, jstr_filename);
