@@ -7,17 +7,19 @@ public class Article {
 	private String title;
 	private String owner;
 	private String timestamp;
+	private String thread;
 	private String filename;
 
-	public Article(String board, String title, String owner, long timestamp) {
-		this(board, title, owner, Long.toString(timestamp));
+	public Article(String board, String title, String owner, long timestamp, long thread) {
+		this(board, title, owner, Long.toString(timestamp), Long.toString(thread));
 	}
 
-	public Article(String board, String title, String owner, String timestamp) {
+	public Article(String board, String title, String owner, String timestamp, String thread) {
 		this.board = board;
 		this.title = title;
 		this.owner = owner;
 		this.timestamp = timestamp;
+		this.thread = thread;
 		this.filename = String.format("M.%s.A", timestamp);
 	}
 
@@ -35,6 +37,10 @@ public class Article {
 
 	public String getTimestamp() {
 		return this.timestamp;
+	}
+
+	public String getThread() {
+		return thread;
 	}
 
 	public String getPath() {

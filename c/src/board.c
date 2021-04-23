@@ -143,7 +143,7 @@ JNIEXPORT jobject JNICALL Java_edu_xjtu_bmybbs_ythtbbs_Board_getAllArticlesAfter
 				continue;
 			}
 
-			jobject jarticle = jni_utils_allocate_new_object_by_classname(env, &hasException, "edu/xjtu/bmybbs/ythtbbs/Article", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;J)V", jstr_board, jstr_title, jstr_owner, (jlong) x->filetime);
+			jobject jarticle = jni_utils_allocate_new_object_by_classname(env, &hasException, "edu/xjtu/bmybbs/ythtbbs/Article", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;JJ)V", jstr_board, jstr_title, jstr_owner, (jlong) x->filetime, (jlong) x->thread);
 			(*env)->DeleteLocalRef(env, jstr_title);                      // release 5
 			(*env)->DeleteLocalRef(env, jstr_owner);                      // release 4
 			if (jarticle == NULL)

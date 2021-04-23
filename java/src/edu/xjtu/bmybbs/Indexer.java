@@ -98,6 +98,7 @@ public class Indexer {
 			doc.add(new StringField(Constants.FIELD_OWNER, article.getOwner(), Field.Store.YES));
 			doc.add(new StringField(Constants.FIELD_TITLE, article.getTitle(), Field.Store.YES));
 			doc.add(new StringField(Constants.FIELD_TIMESTAMP, article.getTimestamp(), Field.Store.YES));
+			doc.add(new StringField(Constants.FIELD_THREAD, article.getThread(), Field.Store.YES));
 			doc.add(new TextField(Constants.FIELD_CONTENTS, article.getContent(), Field.Store.NO));
 
 			try {
