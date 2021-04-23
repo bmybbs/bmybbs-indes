@@ -17,6 +17,7 @@ public class Article {
 		this.board = board;
 		this.title = title;
 		this.owner = owner;
+		this.timestamp = timestamp;
 		this.filename = String.format("M.%s.A", timestamp);
 	}
 
