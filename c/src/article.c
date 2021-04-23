@@ -93,7 +93,8 @@ JNIEXPORT jstring JNICALL Java_edu_xjtu_bmybbs_ythtbbs_Article_getContent(JNIEnv
 	jfieldID fid;
 	jstring jstr_board, jstr_filename, jstr_content = NULL;
 	const char *board, *filename;
-	char buf[STRLEN * 2];
+	char *buf;
+	size_t len;
 
 	clazz = (*env)->GetObjectClass(env, jThis);
 	fid = (*env)->GetFieldID(env, clazz, "board", "Ljava/lang/String;");
@@ -105,8 +106,12 @@ JNIEXPORT jstring JNICALL Java_edu_xjtu_bmybbs_ythtbbs_Article_getContent(JNIEnv
 			jstr_filename = (*env)->GetObjectField(env, jThis, fid);
 			filename = (*env)->GetStringUTFChars(env, jstr_filename, NULL);
 
-			snprintf(buf, sizeof(buf), MY_BBS_HOME "/boards/%s/%s", board, filename);
-			jstr_content = getContent(env, buf);
+			len = strlen(MY_BBS_HOME "/boards//0") + strlen(board) + strlen(filename);
+			if ((buf = malloc(len)) != NULL) {
+				snprintf(buf, len, MY_BBS_HOME "/boards/%s/%s", board, filename);
+				jstr_content = getContent(env, buf);
+				free(buf);
+			}
 
 			(*env)->ReleaseStringUTFChars(env, jstr_filename, filename);
 			(*env)->DeleteLocalRef(env, jstr_filename);
