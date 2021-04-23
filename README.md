@@ -21,7 +21,7 @@
 
 ## 构建
 
-```
+```bash
 # libbmybbs-java.so
 pushd c
 cp config.sample.cmake config.cmake
@@ -36,5 +36,60 @@ popd
 # bmybbs-index-${version}.jar
 pushd java
 mvn package
+
+# dependencies
+mvn dependency:copy-dependencies
 ```
+
+## 使用
+
+假设 `bmybbs-indes-${version}.jar` 已经和其依赖的 `*.jar` 放在同一个目录下。
+
+### 索引
+
+```bash
+LD_LIBRARY_PATH=/path/to/dir/for/libbmybbs-java.so java -cp "/path/to/dir/for/jars" edu.xjtu.bmybbs.App index <board_name> <delta_days>
+```
+
+其中 `<board_name>` `<delta_days>` 都是参数，分别有两个魔数：
+* `ALL` 表示所有版面
+* `-1` 表示所有时间段。
+
+例如：
+
+```bash
+# 初始化所有索引
+LD_LIBRARY_PATH=/path/to/dir/for/libbmybbs-java.so java -cp "/path/to/dir/for/jars" edu.xjtu.bmybbs.App index ALL -1
+
+# 新增过去 24h 内的索引
+LD_LIBRARY_PATH=/path/to/dir/for/libbmybbs-java.so java -cp "/path/to/dir/for/jars" edu.xjtu.bmybbs.App index ALL 1
+```
+
+### 查询
+
+```bash
+LD_LIBRARY_PATH=/path/to/dir/for/libbmybbs-java.so java -cp "/path/to/dir/for/jars" edu.xjtu.bmybbs.App search <board_name> <query>
+```
+
+例如：
+
+```bash
+LD_LIBRARY_PATH=/path/to/dir/for/libbmybbs-java.so java -cp "/path/to/dir/for/jars" edu.xjtu.bmybbs.App search XJTUnews 西安交通大学
+```
+
+输出 JSON 格式的查询结果到 `stdout`，UTF8 编码。数组中的每一项包括：
+
+* `board`: 版面
+* `title`: 标题
+* `owner`: 作者
+* `timestamp`: 文章时间，适用于 term / www 方式搜索，有传统阅读模式
+* `thread`: 主题时间，适用于默认主题阅读模式的情况
+
+## 许可
+
+MIT
+
+## 版本日志
+
+* 0.1.0: 重新实现原 PyLucene 脚本中的索引 / 查询方式。（少许字段追加、改动）
 

@@ -8,7 +8,7 @@
 
 	<groupId>edu.xjtu.bmybbs</groupId>
 	<artifactId>bmybbs-indes</artifactId>
-	<version>0.0.1</version>
+	<version>0.1.0</version>
 
 	<name>indes</name>
 	<description>Indexer and searcher for BMYBBS.</description>
