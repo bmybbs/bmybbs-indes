@@ -94,10 +94,10 @@ public class Indexer {
 			Document doc = new Document();
 
 			// StringField: stored, not analyzed and indexed
-			doc.add(new StringField("name", article.getFilename(), Field.Store.YES));
-			doc.add(new StringField("owner", article.getOwner(), Field.Store.YES));
-			doc.add(new StringField("title", article.getTitle(), Field.Store.YES));
-			doc.add(new TextField("contents", article.getContent(), Field.Store.NO));
+			doc.add(new StringField(Constants.FIELD_FILENAME, article.getFilename(), Field.Store.YES));
+			doc.add(new StringField(Constants.FIELD_OWNER, article.getOwner(), Field.Store.YES));
+			doc.add(new StringField(Constants.FIELD_TITLE, article.getTitle(), Field.Store.YES));
+			doc.add(new TextField(Constants.FIELD_CONTENTS, article.getContent(), Field.Store.NO));
 
 			try {
 				writer.addDocument(doc);
