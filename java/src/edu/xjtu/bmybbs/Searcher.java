@@ -1,5 +1,6 @@
 package edu.xjtu.bmybbs;
 
+import com.google.gson.Gson;
 import edu.xjtu.bmybbs.ythtbbs.Article;
 import edu.xjtu.bmybbs.ythtbbs.Board;
 import org.apache.lucene.analysis.Analyzer;
@@ -69,15 +70,14 @@ public class Searcher {
 				System.err.format("无法获取内容: ScoreDoc %d\n", sd.doc);
 				continue;
 			}
-			articles.add(new Article(bname, doc.get(Constants.FIELD_TITLE), doc.get(Constants.FIELD_OWNER), doc.get(Constants.FIELD_TIMESTAMP)));
+			articles.add(new Article(bname, doc.get(Constants.FIELD_TITLE), doc.get(Constants.FIELD_OWNER), doc.get(Constants.FIELD_TIMESTAMP), doc.get(Constants.FIELD_THREAD)));
 		}
+		outputArticles(articles);
 	}
 
-	private void outputArticles(List<Article> articles) {
+	private static void outputArticles(List<Article> articles) {
 		if (articles != null) {
-			for (Article a : articles) {
-				System.out.format("%s\t%s\t%s\n", a.getTitle(), a.getOwner(), a.getTimestamp());
-			}
+			System.out.println(new Gson().toJson(articles));
 		}
 	}
 }
